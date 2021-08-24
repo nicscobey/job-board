@@ -1,0 +1,63 @@
+.navbar {
+    /* justify-content: space-around; */
+    width: auto;
+}
+.nav-button {
+    display: flex;
+    flex-direction: column;
+}
+
+.white-text {
+    color: white;
+}
+
+.card {
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container-fluid {
+    width: 33.3333vw;
+    padding: 0;
+    text-align: center;
+}
+   
+.nav-icon {
+    /* width: 100%; */
+/* margin-left: 0; */
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.nav-icon {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-links {
+    text-align: center;
+}
+
+.card-link {
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 2px solid blue;
+}
+
+.learn-more-btn {
+    color: blue;
+}
+
+.apply-now-btn {
+    color: white;
+    background-color: blue;
+}
