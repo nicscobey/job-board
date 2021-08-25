@@ -1,3 +1,15 @@
+:root {
+    --purple-200: #c5b4e5;
+    --purple-300: #a98eda;
+    --purple-500: #7042c1;
+    --purple-600: #59359a;
+    --purple-700: #432874;
+    --yellow-200: #ffe69b;
+    --yellow-300: #ffd969;
+    --yellow-400: #ffcd38;
+    --yellow-500: #ffc007;
+}
+
 .navbar {
     /* justify-content: space-around; */
     width: auto;
@@ -11,10 +23,21 @@
     color: white;
 }
 
-.card {
+a.white-text:hover {
+    color: var(--yellow-200);
+}
+
+.carousel {
     max-width: 800px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.card {
+    max-width: 800px;
+    /* margin-right: auto;
+    margin-left: auto; */
+    margin: 10px auto 10px auto;
 }
 
 .container-fluid {
@@ -33,8 +56,7 @@
 }
 
 .nav-icon {
-    margin-right: auto;
-    margin-left: auto;
+    margin-right: 0;
 }
 
 .header-top-row {
@@ -46,18 +68,111 @@
     text-align: center;
 }
 
+.btn {
+    border: 2px solid var(--purple-500);
+}
+
 .card-link {
-    border-radius: 20px;
     padding: 5px 10px;
     text-decoration: none;
-    border: 2px solid blue;
+    border: 2px solid var(--purple-500);
+    /* border: var(--purple-500); */
 }
 
-.learn-more-btn {
-    color: blue;
+.card-link:hover, .btn:hover {
+    border: 2px solid var(--purple-600);
 }
 
-.apply-now-btn {
+.white-btn {
+    color: var(--purple-500);
+    background-color: white;
+}
+
+.white-btn:hover {
+    color: var(--purple-600);
+}
+
+.purple-btn {
     color: white;
-    background-color: blue;
+    background-color: var(--purple-500);
+}
+
+.purple-btn:hover {
+    background-color: var(--purple-600);
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    padding: 50px;
+}
+
+#searchForm {
+    max-width: 600px;
+    /* margin-right: auto;
+    margin-left: auto; */
+    margin: 50px auto 50px auto;
+}
+
+#jobs {
+    margin-bottom: 80px;
+}
+
+/* ***************************
+Tablet Media Query
+*************************** */
+
+/* textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: var(--yellow-300);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--yellow-300);
+  outline: 0 none;
+} */
+
+.form-control:focus {
+    border-color: var(--yellow-300);
+
+}
+
+.form-control:focus, .btn:focus {   
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--yellow-300);
+    outline: 0 none;
+  }
+
+.italics {
+    font-style: italic;
+}
+
+@media screen and (min-width: 480px) {
+    body {
+        margin-bottom: 0px;
+        margin-top: 80px;
+    }
+    h1 {
+        font-size: 3.25rem;
+    }
+}
+
+/* ***************************
+Desktop Media Query
+*************************** */
+
+@media screen and (min-width: 769px) {
+    h1 {
+        font-size: 4rem;
+    }
 }
