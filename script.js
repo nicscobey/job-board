@@ -2,7 +2,7 @@
 
 //if screen width 480px or higher, add .fixed-top to nav, and remove .fixed-bottom
 
-let nav = $('nav');
+let nav = $('.navbar');
 const moveNav = () => {
     console.log($(window).width());
     if ($(window).width() > 479) {

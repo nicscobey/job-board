@@ -10,6 +10,11 @@
     --yellow-500: #ffc007;
 }
 
+body {
+    margin-bottom: 80px;
+    margin-top: 0px;
+}
+
 .navbar {
     /* justify-content: space-around; */
     width: auto;
@@ -115,7 +120,7 @@ h1 {
 }
 
 #jobs {
-    margin-bottom: 80px;
+
 }
 
 /* ***************************

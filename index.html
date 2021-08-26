@@ -8,16 +8,18 @@
     <title>Job Board</title>
 
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 
     <!--jQuery-->
     <script defer src="https://code.jquery.com/jquery-3.6.0.slim.js"
         integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
-    <!-- JavaScript Bundle with Popper -->
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script defer src="/script.js"></script>
 
@@ -27,7 +29,7 @@
     <h1>Job Board</h1>
     <!--Carousel-->
     <!--NOTE: IDS WILL NEED TO BE ADJUSTED-->
-    <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="Images/Carousel/Job Board Carousel.svg" class="d-block w-100" alt="...">
@@ -39,11 +41,13 @@
                 <img src="Images/Carousel/Job Board Carousel (2).svg" class="d-block w-100" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -89,26 +93,27 @@
 
     <div id="jobs">
 
+
         <div class="card border-secondary mb-3">
             <div class="card-header">
                 <div class="header-top-row header-row">
                     <div class="header title-employer-names">
                         <h5>Job Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Employer, Location</h6>
+                        <h7 class="card-subtitle mb-2 text-muted italics">Date Posted</h7>
                     </div>
                     <img class="nav-icon" src="Images/Job Board Icons (1) copy 4.svg" width=30px>
                 </div>
                 <div class="header-bottom-row header-row card-links">
-                    <button class="btn white-btn card-link" type="button" data-toggle="collapse"
-                        data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn white-btn card-link" data-bs-toggle="collapse" href="#collapseExample"
+                        role="button" aria-expanded="false" aria-controls="collapseExample">
                         Learn More
                     </button>
-                    <button class="btn purple-btn card-link" type="button" data-toggle="collapse" data-target=""
+                    <button class="btn purple-btn card-link" type="button" data-bs-toggle="collapse" data-bs-target=""
                         aria-expanded="false" aria-controls="collapseExample">
                         Apply Now
                     </button>
                 </div>
-                <h7 class="card-subtitle mb-2 text-muted italics">Date Posted</h7>
             </div>
             <div class="collapse" id="collapseExample">
                 <div class="card-body text-secondary">
@@ -118,6 +123,19 @@
         </div>
     </div>
 
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 
     <nav class="navbar fixed-bottom navbar-dark bg-dark">
