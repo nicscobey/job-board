@@ -69,6 +69,28 @@ a.white-text:hover {
     justify-content: space-between;
     align-items: center;
 }
+
+.empty-heart, .filled-heart {
+    /* transition-duration: .1s; */
+    /* position: absolute; */
+}
+
+.empty-heart {
+
+}
+
+.filled-heart {
+
+}
+
+.heart:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
 .card-links {
     text-align: center;
 }
