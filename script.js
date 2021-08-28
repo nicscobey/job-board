@@ -86,9 +86,9 @@ appendExperienceLevels();
 //call API
 //add cards to #jobs
 
-const loadJobs = () => {
+const loadJobs = (page) => {
     console.log('enter checkbox function');
-    linkAdd = "";
+    linkAdd = `&page=${page}`;
     for (let i = 0; i < jobCategories.length; i++) {
         // console.log(i);
         // console.log($('.form-check-input')[i]);
@@ -128,6 +128,7 @@ const pullData = (url) => {
             console.log(data);
             // loadDataToCard(data);
             createJobCards(data);
+            setPages(data.page, data.page_count)
         },
         function (error) {
             console.log('bad request', error);
@@ -140,13 +141,29 @@ $('form').on('submit', (event) => {
     event.preventDefault();
     $('#jobs').html("")
     console.log('submitted form')
-    let apiLink = "https://www.themuse.com/api/public/jobs?location=Flexible%20%2F%20Remote&page=1";
+    let apiLink = "https://www.themuse.com/api/public/jobs?location=Flexible%20%2F%20Remote";
     console.log(apiLink);
-    let linkAdd = loadJobs();
+    let linkAdd = loadJobs(1);
     apiLink += linkAdd;
     console.log(apiLink);
     pullData(apiLink);
 })
+
+//do the following once a page # button is clicked
+const changePage = () => {
+
+    //do something to get the page #
+
+
+    $('#jobs').html("")
+    console.log('submitted form')
+    let apiLink = "https://www.themuse.com/api/public/jobs?location=Flexible%20%2F%20Remote";
+    console.log(apiLink);
+    let linkAdd = loadJobs(PAGENUMBER);
+    apiLink += linkAdd;
+    console.log(apiLink);
+    pullData(apiLink);
+}
 
 
 
@@ -183,6 +200,16 @@ const createJobCards = (data) => {
         $('#jobs').append(innerText);
     })
 }
+
+
+//SET PAGINATION
+const setPages = (currentPage, totalPages) => {
+    console.log('set pages')
+    console.log(currentPage);
+    console.log(totalPages);
+    $('.pagination').append()
+}
+
 
 
 //make carousel text smaller
