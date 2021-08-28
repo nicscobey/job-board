@@ -1,34 +1,10 @@
-//populate form fields
-// let jobCategoriesArray = [
-//     { "Accounting": "Accounting" },
-//     { "Account Management & Customer Success": "Account%20Management%2FCustomer%20Success" },
-//     { "Corporate": "Corporate" },
-//     { "Customer Service": "Customer%20Service%20Career" },
-//     { "Data Science": "Data%20Science" },
-//     { "Design": "Design" },
-//     { "Editor": "Editor" },
-//     { "Education": "Education" },
-//     { "Human Resources": "HR" },
-//     { "Information Technology": "IT" },
-//     { "Law": "Law" },
-//     { "Marketing": "Marketing" },
-//     { "Mechanic": "Mechanic" },
-//     { "Mental Health": "Mental%20Health" },
-//     { "Nursing": "Nurses" },
-//     { "Office Administration": "Office%20Administration" },
-//     { "Physical Assistant": "Physical%20Assistant" },
-//     { "Product": "Product" },
-//     { "Project Management": "Project%20Management" },
-//     { "Public Relations": "Public%20Relations" },
-//     { "Recruiting": "Recruiting" },
-//     { "Retail": "Retail" },
-//     { "Sales": "Sales" },
-//     { "Software Engineering": "Software%20Engineer" },
-//     { "User Experience": "User%20Experience" },
-//     { "Videography": "Videography" },
-//     { "Writing": "Writing" }
-// ];
+//ORDER OF OPERATIONS
+//submit button is pushed
+//checkbox function (appends to API link)
+//go to a function that calls API and loads data to cards (there's a loadDataToCard function that exists already)
 
+
+//LOAD DATA TO PAGE
 let jobCategoriesObject = {
     "Accounting": "Accounting",
     "Account Management & Customer Success": "Account%20Management%2FCustomer%20Success",
@@ -61,12 +37,15 @@ let jobCategoriesObject = {
 
 let jobCategories = Object.getOwnPropertyNames(jobCategoriesObject);
 
-$(jobCategories).each((index) => {
-    // console.log(index)
-    // console.log(jobCategories[index])
-});
+let jobLevelsObject = {
+    "Internship": "Internship",
+    "Entry Level": "Entry%20Level",
+    "Mid Level": "Mid%20Level",
+    "Senior Level": "Senior%20Level",
+    "Management": "management"
+}
 
-let jobLevels = ["Entry Level", "Mid Level", "Senior Level", "Management", "Internship"];
+let jobLevels = Object.getOwnPropertyNames(jobLevelsObject);
 
 const appendJobCategories = () => {
     // console.log("A");
@@ -74,7 +53,7 @@ const appendJobCategories = () => {
     $(jobCategories).each((job) => {
         $('.job-category-selection').append(`
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <input class="form-check-input job-category" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                     ${jobCategories[job]}
                 </label>
@@ -85,27 +64,126 @@ const appendJobCategories = () => {
 
 appendJobCategories();
 
-let apiLink = "https://www.themuse.com/api/public/jobs?location=Flexible%20%2F%20Remote&page=1";
-let text = "Nursing"
-apiLink += jobCategoriesObject[text];
-
-console.log(apiLink);
-
-const checkboxFunction = () => {
-    console.log('enter checkbox function');
-    for (let i = 0; i < jobCategories.length; i++) {
-        console.log(i);
-        console.log($('.form-check-input')[i]);
-        if ($('.form-check').is(":checked")) {
-            // it is checked
-            // apiLink += `${ jobCategoriesObject.} `
-            console.log(i, "SOMETHING IS CHECKED!")
-            apiLink += jobCategoriesObject[Nursing]
-        }
-    }
+const appendExperienceLevels = () => {
+    // console.log("A");
+    // console.log(jobCategories);
+    $(jobLevels).each((level) => {
+        $('.experience-levels').append(`
+            <div class="form-check">
+                <input class="form-check-input experience-level" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    ${jobLevels[level]}
+                </label>
+            </div>
+        `)
+    })
 }
 
-// console.log(`https://www.themuse.com/api/public/jobs?******&location=Flexible%20%2F%20Remote&page=1`)
+appendExperienceLevels();
+
+//when submit button is pushed,
+//clear form elements
+//call API
+//add cards to #jobs
+
+const loadJobs = () => {
+    console.log('enter checkbox function');
+    linkAdd = "";
+    for (let i = 0; i < jobCategories.length; i++) {
+        // console.log(i);
+        // console.log($('.form-check-input')[i]);
+
+        //appends job categories to API URL
+        if ($('.job-category')[i].checked == true) {
+            // it is checked
+            // apiLink += `${ jobCategoriesObject.} `
+            console.log(i, "JOB CATEGORY IS CHECKED!")
+            // console.log(jobCategoriesObject[jobCategories[i]])
+            linkAdd += "&category=" + jobCategoriesObject[jobCategories[i]];
+            console.log(linkAdd);
+        }
+
+    }
+    //appends experience levels to API URL
+    console.log('jobLevels length:', jobLevels.length);
+    for (let i = 0; i < jobLevels.length; i++) {
+        if ($('.experience-level')[i].checked == true) {
+            console.log(i, "EXPERIENCE LEVEL IS CHECKED");
+            // console.log(jobLevels[i]);
+            linkAdd += "&level=" + jobLevelsObject[jobLevels[i]];
+            console.log(linkAdd);
+        }
+    }
+
+    return linkAdd;
+}
+
+
+const pullData = (url) => {
+    $.ajax({
+        // url: `https://www.themuse.com/api/public/jobs?category=Software%20Engineer&location=Flexible%20%2F%20Remote&page=1`
+        url: `${url}`
+    }).then(
+        function (data) {
+            console.log(data);
+            // loadDataToCard(data);
+            createJobCards(data);
+        },
+        function (error) {
+            console.log('bad request', error);
+        }
+    )
+}
+
+
+$('form').on('submit', (event) => {
+    event.preventDefault();
+    $('#jobs').html("")
+    console.log('submitted form')
+    let apiLink = "https://www.themuse.com/api/public/jobs?location=Flexible%20%2F%20Remote&page=1";
+    console.log(apiLink);
+    let linkAdd = loadJobs();
+    apiLink += linkAdd;
+    console.log(apiLink);
+    pullData(apiLink);
+})
+
+
+
+const createJobCards = (data) => {
+    data.results.forEach((job) => {
+        let innerText = `
+            <div id="job-card-${job.id}" class="card border-secondary mb-3">
+                <div class="card-header">
+                    <div class="header-top-row header-row">
+                        <div class="header title-employer-names">
+                            <h5 class="job-title">${job.name}</h5>
+                            <h6 class="employer-location card-subtitle mb-2 text-muted">${job.company.name}</h6>
+                            <h7 class="date-posted card-subtitle mb-2 text-muted italics">Posted on ${job.publication_date}</h7>
+                        </div>
+                        <img class="nav-icon heart empty-heart" src="Images/Job Board Icons (1) copy 4.svg" width=30px>
+                    </div>
+                    <div class="header-bottom-row header-row card-links">
+                        <button class="btn white-btn card-link" data-bs-toggle="collapse" href="#jobDescription${job.id}"
+                            role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Learn More
+                        </button>
+                        <a class="btn purple-btn card-link" target = "_blank" href="${job.refs.landing_page}">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+                <div class="collapse" id="jobDescription${job.id}">
+                    <div class="card-body text-secondary">
+                        <p class="job-description card-text">${job.contents}</p>
+                    </div>
+                </div>
+            </div>`
+
+        $('#jobs').append(innerText);
+    })
+}
+
 
 //make carousel text smaller
 
@@ -120,42 +198,12 @@ const moveNav = () => {
         nav.removeClass('fixed-top').addClass('fixed-bottom');
     }
 }
+
 moveNav();
 
 $(window).resize(() => {
     moveNav();
 })
-
-//when submit button is pushed,
-//clear form elements
-//call API
-//add cards to #jobs
-
-$('form').on('submit', (event) => {
-    event.preventDefault();
-    console.log('submitted form')
-    checkboxFunction();
-})
-
-
-$.ajax({
-    url: `https://www.themuse.com/api/public/jobs?category=Software%20Engineer&location=Flexible%20%2F%20Remote&page=1`
-}).then(
-    function (data) {
-        console.log(data);
-        loadDataToCard(data);
-    },
-    function (error) {
-        console.log('bad request', error);
-    }
-)
-
-let loadDataToCard = (data) => {
-    $(`.job-title`).html(data.results[0].name)
-    $('.employer-location').html(`${data.results[0].company.name}`)
-    $('.date-posted').html(data.results[0].publication_date)
-    $('.job-description').html(data.results[0].contents)
-}
 
 //clicking "Add to Favorites" button
 //changes img source of fav icon... perhaps with an animation of popping out and popping back in as new img
@@ -163,6 +211,7 @@ let loadDataToCard = (data) => {
 //add that job to an array of favorited icons
 
 let favoriteJobs = [];
+
 $(document).on('click', (event) => {
     if ($(event.target).hasClass("empty-heart")) {
         console.log("YAY HOORAY!");

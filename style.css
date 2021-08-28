@@ -38,6 +38,11 @@ a.white-text:hover {
     margin-left: auto;
 }
 
+.form-label {
+    font-weight: bold;
+    color: var(--purple-500);
+}
+
 .card {
     max-width: 800px;
     /* margin-right: auto;
