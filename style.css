@@ -37,6 +37,9 @@ a.white-text:hover {
     margin-right: auto;
     margin-left: auto;
 }
+form {
+
+}
 
 .form-label {
     font-weight: bold;
@@ -129,7 +132,7 @@ a.white-text:hover {
     background-color: var(--purple-500);
 }
 
-.purple-btn:hover {
+.purple-btn:hover, .purple-btn:focus {
     background-color: var(--purple-600);
     color: white;
 }
@@ -147,9 +150,17 @@ h1 {
 }
 
 #jobs {
-
+    margin-top: 50px;
 }
 
+.job-category-selection, .experience-levels {
+    height: 150px;
+    overflow-y: scroll;
+    border: 1px solid var(--yellow-300);
+    ;
+    padding: 8px;
+    margin: 8px 0 8px 0;
+}
 /* ***************************
 Tablet Media Query
 *************************** */
@@ -180,13 +191,25 @@ input[type="color"]:focus,
 
 }
 
-.form-control:focus, .btn:focus {   
+.form-control:focus, .btn:focus, .page-link:focus {   
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--yellow-300);
     outline: 0 none;
-  }
+}
 
 .italics {
     font-style: italic;
+}
+
+#page-display {
+    text-align: center;
+}
+
+.page-link {
+    color: var(--purple-500);
+}
+
+.page-link:hover {
+    color: var(--purple-600);
 }
 
 @media screen and (min-width: 480px) {
