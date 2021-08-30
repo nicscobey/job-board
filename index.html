@@ -51,107 +51,19 @@
 
     <div id="searchForm">
         <h2>Enter Search Criteria</h2>
-
-        <!-- <form>
-            
-                OPTION 1:
-                industry
-                keyword
-                location
-
-                OPTION 2 (same as indeed):
-                job title, keywords, company 
-                location
-
-                OPTION 3 (LinkedIn):
-                title, skill, or company
-                city, state, or ZIP
-           
-        </form> -->
-        <form>
-            <!-- <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div> -->
-            <!--CATEGORY CHECKBOX-->
-            <!--CAN I MAKE THIS LIST GET PULLED FROM THE MUSE? OR MUST IT BE MAUALLY TYPED?-->
-            <div class="job-category-selection">
+        <form id="form">
+            <div class="job-category-selection form-check-inline">
                 <label class="form-label" for="job-category-selection">Select Job Category</label>
             </div>
             <div class="experience-levels">
                 <label class="form-label" for="experience-level">Select Experience Level</label>
             </div>
-            <!-- <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Default checkbox
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                <label class="form-check-label" for="flexCheckChecked">
-                    Checked checkbox
-                </label>
-            </div> -->
-
-
-            <!--JOB LEVEL CHECKBOX-->
-            <!--CAN I MAKE THIS LIST GET PULLED FROM THE MUSE? OR MUST IT BE MAUALLY TYPED?-->
-            <!-- <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Default checkbox
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                <label class="form-check-label" for="flexCheckChecked">
-                    Checked checkbox
-                </label>
-            </div>
-
-
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div> -->
             <button type="submit" class="btn btn-primary purple-btn">Submit</button>
         </form>
     </div>
 
 
-    <div id="jobs">
-
-
-        <!-- <div class="card border-secondary mb-3">
-            <div class="card-header">
-                <div class="header-top-row header-row">
-                    <div class="header title-employer-names">
-                        <h5 class="job-title">Job Title</h5>
-                        <h6 class="employer-location card-subtitle mb-2 text-muted">Employer, Location</h6>
-                        <h7 class="date-posted card-subtitle mb-2 text-muted italics">Date Posted</h7>
-                    </div>
-                    <img class="nav-icon heart empty-heart" src="Images/Job Board Icons (1) copy 4.svg" width=30px>
-                </div>
-                <div class="header-bottom-row header-row card-links">
-                    <button class="btn white-btn card-link" data-bs-toggle="collapse" href="#collapseExample"
-                        role="button" aria-expanded="false" aria-controls="collapseExample">
-                        Learn More
-                    </button>
-                    <button class="btn purple-btn card-link" type="button" data-bs-toggle="collapse" data-bs-target=""
-                        aria-expanded="false" aria-controls="collapseExample">
-                        Apply Now
-                    </button>
-                </div>
-            </div>
-            <div class="collapse" id="collapseExample">
-                <div class="card-body text-secondary">
-                    <p class="job-description card-text">Blurb about job</p>
-                </div>
-            </div>
-        </div> -->
-    </div>
+    <div id="jobs"></div>
 
     <nav id="page-nav" aria-label="Page navigation example">
         <p id="page-display"></p>
@@ -174,15 +86,17 @@
     <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <div class="nav-button container-fluid" href="#">
             <img id="nav-menu-img" class="nav-icon" src="Images/Job Board Icons (1).svg" width=40px>
-            <a id="nav-menu-link" class="nav-link ontainer-fluid white-text no-underline">Menu</a>
+            <a id="nav-menu-link" class="nav-link container-fluid white-text no-underline">Menu</a>
         </div>
         <div class="nav-button container-fluid" href="#">
             <img id="nav-favorites-img" class="nav-icon" src="Images/Job Board Icons (3).svg" width=40px>
             <a id="nav-favorites-link" class="nav-link container-fluid white-text no-underline">Favorites</a>
         </div>
-        <div class="nav-button container-fluid" href="#">
-            <img id="nav-search-img" class="nav-icon" src="Images/Job Board Icons (1) copy 5.svg" width=40px>
-            <a id="nav-search-link" class="nav-link container-fluid white-text no-underline">Search</a>
+        <div class="nav-button container-fluid" href="">
+            <a href="#form">
+                <img id="nav-search-img" class="nav-icon" src="Images/Job Board Icons (1) copy 5.svg" width=40px>
+            </a>
+            <a href="#form" id="nav-search-link" class="nav-link container-fluid white-text no-underline">Search</a>
         </div>
     </nav>
 </body>

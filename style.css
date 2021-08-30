@@ -44,6 +44,7 @@ form {
 .form-label {
     font-weight: bold;
     color: var(--purple-500);
+    display: block;
 }
 
 .card {
@@ -58,11 +59,6 @@ form {
     padding: 0;
     text-align: center;
 }
-   
-.nav-icon {
-    /* width: 100%; */
-/* margin-left: 0; */
-}
 
 .no-underline {
     text-decoration: none;
@@ -70,6 +66,10 @@ form {
 
 .nav-icon {
     margin-right: 0;
+}
+
+.nav-icon:hover {
+    cursor: pointer;
 }
 
 .header-top-row {
@@ -154,10 +154,11 @@ h1 {
 }
 
 .job-category-selection, .experience-levels {
-    height: 150px;
-    overflow-y: scroll;
-    border: 1px solid var(--yellow-300);
-    ;
+    /* height: 150px;
+    overflow-y: scroll; */
+    text-align: center;
+    /* border: 1px solid var(--yellow-300);
+    ; */
     padding: 8px;
     margin: 8px 0 8px 0;
 }
@@ -194,6 +195,21 @@ input[type="color"]:focus,
 .form-control:focus, .btn:focus, .page-link:focus {   
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--yellow-300);
     outline: 0 none;
+}
+
+.form-check {
+    background-color: var(--yellow-200);   
+    padding: 8px;
+    float: none !important;
+    /* margin-left: 0px !important;  */
+    margin: 2px !important;
+    border-radius: 100px;
+}
+
+.form-check-input {
+    float: none !important;
+    margin-left: 0px !important; 
+    border-radius: 100px !important;
 }
 
 .italics {

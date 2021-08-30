@@ -50,7 +50,7 @@ const appendJobCategories = () => {
     // console.log(jobCategories);
     $(jobCategories).each((job) => {
         $('.job-category-selection').append(`
-            <div class="form-check">
+            <div class="form-check form-check-inline">
                 <input class="form-check-input job-category" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                     ${jobCategories[job]}
@@ -67,7 +67,7 @@ const appendExperienceLevels = () => {
     // console.log(jobCategories);
     $(jobLevels).each((level) => {
         $('.experience-levels').append(`
-            <div class="form-check">
+            <div class="form-check form-check-inline">
                 <input class="form-check-input experience-level" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                     ${jobLevels[level]}
@@ -100,7 +100,6 @@ const loadJobs = (page) => {
             linkAdd += "&category=" + jobCategoriesObject[jobCategories[i]];
             console.log(linkAdd);
         }
-
     }
     //appends experience levels to API URL
     for (let i = 0; i < jobLevels.length; i++) {
@@ -134,7 +133,6 @@ const pullData = (url) => {
 
 $('form').on('submit', (event) => {
     event.preventDefault();
-    $('#searchForm').css('display', 'none')
     //add a note about search results about total search results found. add note to nav about what page we're on of total pages
     changePage(1)
 })
@@ -145,8 +143,9 @@ const changePage = (targetPage) => {
     //do something to get the page #
 
 
-    $('#jobs').html("")
-    $('.pagination').html("");
+    // $('#jobs').html("")
+    // $('.pagination').html("");
+    $('#searchForm').css('display', 'none');
     livePage = targetPage;
     let apiLink = "https://www.themuse.com/api/public/jobs?location=Flexible%20%2F%20Remote";
     let linkAdd = loadJobs(targetPage);
@@ -160,11 +159,27 @@ const convertDateFormat = (currentDate) => {
 }
 
 const createJobCards = (data) => {
+    $('#jobs').html("")
+    $('.pagination').html("");
+    $('#page-display').html("");
+    visibleJobs = [];
+
+
     data.results.forEach((job) => {
         visibleJobs.push(job);
 
         let modifiedDateFormat = convertDateFormat(job.publication_date);
 
+
+        let heartClass = "empty-heart";
+        let heartImgRef = "Images/Job Board Icons (1) copy 4.svg";
+
+        for (let i = 0; i < favoriteJobs.results.length; i++) {
+            if (favoriteJobs.results[i].id == job.id) {
+                heartClass = "filled-heart";
+                heartImgRef = "Images/Job Board Icons (1) copy.svg";
+            }
+        }
 
         //NEED A FUNCTION HERE THAT CHECKS IF A JOB WITH ID MATCHES JOBS THAT ARE BEING ADDED HERE. IF THERE IS A MATCH, THE NEW JOB SHOULD BE CREATED WITH THE FILLED HEART
 
@@ -177,7 +192,7 @@ const createJobCards = (data) => {
                             <h6 class="employer-location card-subtitle mb-2 text-muted">${job.company.name}</h6>
                             <h7 class="date-posted card-subtitle mb-2 text-muted italics">Posted ${modifiedDateFormat}</h7>
                         </div>
-                        <img id="${job.id}" class="nav-icon heart empty-heart" src="Images/Job Board Icons (1) copy 4.svg" width=30px>
+                        <img id="${job.id}" class="nav-icon heart ${heartClass}" src="${heartImgRef}" width=30px>
                     </div>
                     <div class="header-bottom-row header-row card-links">
                         <button class="btn white-btn card-link" data-bs-toggle="collapse" href="#jobDescription${job.id}"
@@ -279,11 +294,13 @@ $(window).resize(() => {
 //add notification that it was added to favorites
 //add that job to an array of favorited icons
 
-let favoriteJobs = [];
+let favoriteJobs = { results: [] };
 
 const menuFunctions = () => {
 
 }
+//ADD A BACK TO SEARCH RESULTS FUNCTION 
+//THAT RETURNS TO THE LAST PAGE (CALLS THE CREATEJOBCARDS(LAST URL API) AGAIN). THIS ALSO MEANS WE'LL NEED TO SAVE THE LATEST API URL INTO A VARIABLE.
 
 const addToFavorites = (jobID) => {
     console.log('add to favorites');
@@ -291,7 +308,7 @@ const addToFavorites = (jobID) => {
     for (let i = 0; i < visibleJobs.length; i++) {
         console.log(visibleJobs[i].id)
         if (visibleJobs[i].id == jobID) {
-            favoriteJobs.push(visibleJobs[i]);
+            favoriteJobs.results.push(visibleJobs[i]);
         }
     }
 
@@ -299,15 +316,38 @@ const addToFavorites = (jobID) => {
     console.log(favoriteJobs);
 }
 
-const removeFromFavorites = (jobId) => {
+const removeFromFavorites = (jobID) => {
     console.log('remove from favorites');
+    console.log(jobID)
+
+    console.log(visibleJobs);
 
     for (let i = 0; i < visibleJobs.length; i++) {
         console.log(visibleJobs[i].id)
         if (visibleJobs[i].id == jobID) {
-            favoriteJobs.push(visibleJobs[i]);
+            console.log('here we go');
+            console.log(favoriteJobs);
+            console.log(i);
+            favoriteJobs.results.splice(i, 1);
+            console.log('favoriteJobs is')
+            console.log(favoriteJobs);
+            return;
         }
     }
+
+}
+
+const showFavorites = () => {
+    console.log('show favorites');
+    console.log(favoriteJobs)
+
+    createJobCards(favoriteJobs);
+}
+
+const openSearchForm = () => {
+    console.log('open search form');
+    $('#searchForm').css('display', 'block')
+
 }
 
 $(document).on('click', (event) => {
@@ -322,6 +362,9 @@ $(document).on('click', (event) => {
     else if ($(event.target).hasClass("filled-heart")) {
         console.log("WOAH!");
         $(event.target).attr('src', 'Images/Job Board Icons (1) copy 4.svg').addClass('empty-heart').removeClass('filled-heart');
+
+        let jobID = $(event.target).attr('id');
+        removeFromFavorites(jobID);
     }
     else if ($(event.target).hasClass('next-page')) {
         console.log('next page, please!')
@@ -331,7 +374,25 @@ $(document).on('click', (event) => {
         console.log('previous page, please!')
         changePage(livePage - 1);
     }
+    else if ($(event.target) == $('#nav-menu-img')) {
+        console.log('nav-menu-img')
+        console.log("IT WORKED!")
+    }
+    else if ($(event.target).attr('id') === 'nav-menu-img' || $(event.target).attr('id') === 'nav-menu-link') {
+        console.log("MENU LINK")
+    }
+    else if ($(event.target).attr('id') === 'nav-favorites-img' || $(event.target).attr('id') === 'nav-favorites-link') {
+        console.log("FAVORITES LINK")
+        showFavorites();
+    }
+    else if ($(event.target).attr('id') === 'nav-search-img' || $(event.target).attr('id') === 'nav-search-link') {
+        console.log("SEARCH LINK")
+        openSearchForm();
+    }
 })
+
+
+
 
 // const hideTarget = (heart) => {
 //     console.log('remove hidden!');
