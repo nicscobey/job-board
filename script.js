@@ -45,6 +45,8 @@ let visibleJobs = [];
 
 let livePage;
 
+let lastPage = 1;
+
 const appendJobCategories = () => {
     // console.log("A");
     // console.log(jobCategories);
@@ -119,10 +121,10 @@ const pullData = (url) => {
         url: `${url}`
     }).then(
         function (data) {
-            console.log(data);
+            // console.log(data);
             createJobCards(data);
             checkCurrentPage(data.page, data.page_count)
-
+            // lastPage = data;
         },
         function (error) {
             console.log('bad request', error);
@@ -147,6 +149,7 @@ const changePage = (targetPage) => {
     // $('.pagination').html("");
     $('#searchForm').css('display', 'none');
     livePage = targetPage;
+    lastPage = targetPage;
     let apiLink = "https://www.themuse.com/api/public/jobs?location=Flexible%20%2F%20Remote";
     let linkAdd = loadJobs(targetPage);
     apiLink += linkAdd;
@@ -162,7 +165,13 @@ const createJobCards = (data) => {
     $('#jobs').html("")
     $('.pagination').html("");
     $('#page-display').html("");
+    // console.log('visible jobs is')
+    // console.log(visibleJobs);
+
+
     visibleJobs = [];
+
+    console.log(data)
 
 
     data.results.forEach((job) => {
@@ -218,6 +227,16 @@ const createJobCards = (data) => {
 
 //SET PAGINATION
 //NEW PAGINATION ATTEMPT (USING JUST NEXT AND LAST PAGE BUTTONS)
+
+
+
+//TO DO //////////
+
+//  CREATE README
+//  CONSIDER OAUTH
+//  STORE FAVORITES LOCALLY
+//  ADD MESSAGE IF NO RESULTS FOUND
+
 
 const checkCurrentPage = (currentPage, totalPages) => {
 
@@ -299,14 +318,13 @@ let favoriteJobs = { results: [] };
 const menuFunctions = () => {
 
 }
-//ADD A BACK TO SEARCH RESULTS FUNCTION 
-//THAT RETURNS TO THE LAST PAGE (CALLS THE CREATEJOBCARDS(LAST URL API) AGAIN). THIS ALSO MEANS WE'LL NEED TO SAVE THE LATEST API URL INTO A VARIABLE.
+
 
 const addToFavorites = (jobID) => {
     console.log('add to favorites');
 
     for (let i = 0; i < visibleJobs.length; i++) {
-        console.log(visibleJobs[i].id)
+        // console.log(visibleJobs[i].id)
         if (visibleJobs[i].id == jobID) {
             favoriteJobs.results.push(visibleJobs[i]);
         }
@@ -323,7 +341,6 @@ const removeFromFavorites = (jobID) => {
     console.log(visibleJobs);
 
     for (let i = 0; i < visibleJobs.length; i++) {
-        console.log(visibleJobs[i].id)
         if (visibleJobs[i].id == jobID) {
             console.log('here we go');
             console.log(favoriteJobs);
@@ -331,6 +348,10 @@ const removeFromFavorites = (jobID) => {
             favoriteJobs.results.splice(i, 1);
             console.log('favoriteJobs is')
             console.log(favoriteJobs);
+
+
+            //remove element from DOM
+            $(`#job-card-${jobID}`).remove();
             return;
         }
     }
@@ -341,13 +362,32 @@ const showFavorites = () => {
     console.log('show favorites');
     console.log(favoriteJobs)
 
+    // lastPage = visibleJobs;
+    console.log('lastPage:');
+    console.log(lastPage);
+
+    //add new menu button for return to results
+    //will also need to get rid of the button when the return button is clicked
+
+    $('.navbar').prepend(`<div id="return-button" class="nav-button container-fluid" href="#">
+<img id="nav-return-img" class="nav-icon" src="Images/Job Board Icons (1) copy 6.svg" width=40px>
+<a id="nav-return-link" class="nav-link container-fluid white-text no-underline">Back to Results</a>
+</div>`);
+
     createJobCards(favoriteJobs);
+}
+
+const returnToSearch = (data) => {
+    console.log('return to search');
+    console.log(lastPage)
+    changePage(lastPage);
+    $('#return-button').remove();
 }
 
 const openSearchForm = () => {
     console.log('open search form');
     $('#searchForm').css('display', 'block')
-
+    $('#jobs').html("")
 }
 
 $(document).on('click', (event) => {
@@ -389,8 +429,45 @@ $(document).on('click', (event) => {
         console.log("SEARCH LINK")
         openSearchForm();
     }
+    else if ($(event.target).attr('id') === 'nav-return-img' || $(event.target).attr('id') === 'nav-return-link') {
+        console.log("RETURN LINK");
+        returnToSearch(lastPage);
+        // openSearchForm();
+    }
 })
 
+$(document).on('mouseover', (event) => {
+    if ($(event.target).attr('id') === 'nav-menu-img' || $(event.target).attr('id') === 'nav-menu-link') {
+        $('#nav-menu-link').css('color', 'var(--yellow-200)')
+    }
+    else if ($(event.target).attr('id') === 'nav-favorites-img' || $(event.target).attr('id') === 'nav-favorites-link') {
+        $('#nav-favorites-link').css('color', 'var(--yellow-200)')
+    }
+    else if ($(event.target).attr('id') === 'nav-search-img' || $(event.target).attr('id') === 'nav-search-link') {
+        $('#nav-search-link').css('color', 'var(--yellow-200)')
+    }
+    else if ($(event.target).attr('id') === 'nav-return-img' || $(event.target).attr('id') === 'nav-return-link') {
+        $('#nav-return-link').css('color', 'var(--yellow-200)')
+    }
+})
+
+$(document).on('mouseout', (event) => {
+    if ($(event.target).attr('id') === 'nav-menu-img' || $(event.target).attr('id') === 'nav-menu-link') {
+        $('#nav-menu-link').css('color', 'white')
+    }
+    else if ($(event.target).attr('id') === 'nav-favorites-img' || $(event.target).attr('id') === 'nav-favorites-link') {
+        $('#nav-favorites-link').css('color', 'white')
+    }
+    else if ($(event.target).attr('id') === 'nav-search-img' || $(event.target).attr('id') === 'nav-search-link') {
+        $('#nav-search-link').css('color', 'white')
+    }
+    else if ($(event.target).attr('id') === 'nav-return-img' || $(event.target).attr('id') === 'nav-return-link') {
+        $('#nav-return-link').css('color', 'white')
+    }
+})
+
+        //use this to change color of text when hovering over the img or the link
+        // $('.#nav-menu-link').css('color', 'var(--yellow-200)')
 
 
 

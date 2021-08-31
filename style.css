@@ -1,9 +1,11 @@
 :root {
+    --purple-100: #e2d9f3;
     --purple-200: #c5b4e5;
     --purple-300: #a98eda;
     --purple-500: #7042c1;
     --purple-600: #59359a;
     --purple-700: #432874;
+    --yellow-100: #fdf3cd;
     --yellow-200: #ffe69b;
     --yellow-300: #ffd969;
     --yellow-400: #ffcd38;
@@ -29,7 +31,8 @@ body {
 }
 
 a.white-text:hover {
-    color: var(--yellow-200);
+    /* color: var(--yellow-200); */
+    cursor: pointer;
 }
 
 .carousel {
@@ -68,10 +71,14 @@ form {
     margin-right: 0;
 }
 
-.nav-icon:hover {
+.nav-icon:hover, .form-check-input:hover {
     cursor: pointer;
 }
 
+.card-header {
+    background-color: var(--yellow-100);
+
+}
 .header-top-row {
     display: flex;
     justify-content: space-between;
@@ -114,6 +121,10 @@ form {
     /* border: var(--purple-500); */
 }
 
+.collapse {
+    /* background-color: var(--purple-100); */
+
+}
 .card-link:hover, .btn:hover {
     border: 2px solid var(--purple-600);
 }
@@ -132,7 +143,7 @@ form {
     background-color: var(--purple-500);
 }
 
-.purple-btn:hover, .purple-btn:focus {
+.purple-btn:hover, .purple-btn:focus, .custom-control-label:before {
     background-color: var(--purple-600);
     color: white;
 }
@@ -192,9 +203,10 @@ input[type="color"]:focus,
 
 }
 
-.form-control:focus, .btn:focus, .page-link:focus {   
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--yellow-300);
+button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:focus {   
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--purple-300);
     outline: 0 none;
+    border-color: var(--purple-600);
 }
 
 .form-check {
@@ -210,6 +222,17 @@ input[type="color"]:focus,
     float: none !important;
     margin-left: 0px !important; 
     border-radius: 100px !important;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--purple-300);
+    border-color: var(--purple-600);
+}
+
+.form-check-input:checked {
+    background-color: var(--purple-500);
+    border-color: var(--purple-600);
+
 }
 
 .italics {
