@@ -48,8 +48,6 @@ let livePage;
 let lastPage = 1;
 
 const appendJobCategories = () => {
-    // console.log("A");
-    // console.log(jobCategories);
     $(jobCategories).each((job) => {
         $('.job-category-selection').append(`
             <div class="form-check form-check-inline">
@@ -65,8 +63,6 @@ const appendJobCategories = () => {
 appendJobCategories();
 
 const appendExperienceLevels = () => {
-    // console.log("A");
-    // console.log(jobCategories);
     $(jobLevels).each((level) => {
         $('.experience-levels').append(`
             <div class="form-check form-check-inline">
@@ -87,20 +83,11 @@ appendExperienceLevels();
 //add cards to #jobs
 
 const loadJobs = (page) => {
-    console.log('enter checkbox function');
     linkAdd = `&page=${page}`;
     for (let i = 0; i < jobCategories.length; i++) {
-        // console.log(i);
-        // console.log($('.form-check-input')[i]);
-
         //appends job categories to API URL
         if ($('.job-category')[i].checked == true) {
-            // it is checked
-            // apiLink += `${ jobCategoriesObject.} `
-            console.log(i, "JOB CATEGORY IS CHECKED!")
-            // console.log(jobCategoriesObject[jobCategories[i]])
             linkAdd += "&category=" + jobCategoriesObject[jobCategories[i]];
-            console.log(linkAdd);
         }
     }
     //appends experience levels to API URL
@@ -117,7 +104,6 @@ const loadJobs = (page) => {
 
 const pullData = (url) => {
     $.ajax({
-        // url: `https://www.themuse.com/api/public/jobs?category=Software%20Engineer&location=Flexible%20%2F%20Remote&page=1`
         url: `${url}`
     }).then(
         function (data) {
@@ -141,12 +127,6 @@ $('form').on('submit', (event) => {
 
 //do the following once a page # button is clicked
 const changePage = (targetPage) => {
-
-    //do something to get the page #
-
-
-    // $('#jobs').html("")
-    // $('.pagination').html("");
     $('#searchForm').css('display', 'none');
     livePage = targetPage;
     lastPage = targetPage;
@@ -165,14 +145,9 @@ const createJobCards = (data) => {
     $('#jobs').html("")
     $('.pagination').html("");
     $('#page-display').html("");
-    // console.log('visible jobs is')
-    // console.log(visibleJobs);
 
 
     visibleJobs = [];
-
-    console.log(data)
-
 
     data.results.forEach((job) => {
         visibleJobs.push(job);
@@ -235,11 +210,9 @@ const createJobCards = (data) => {
 //  CREATE README
 //  CONSIDER OAUTH
 //  STORE FAVORITES LOCALLY
-//  NOTIFICATION (TOAST WHEN ADDED TO FAVORITE)
 
 
 const checkCurrentPage = (currentPage, totalPages) => {
-
     $('#page-display').html(`Page ${currentPage} of ${totalPages}`);
 
     if (totalPages === 0) {
@@ -247,29 +220,20 @@ const checkCurrentPage = (currentPage, totalPages) => {
         $('#jobs').html("Sorry - No jobs found! Try another search.")
     }
     if (currentPage > 1 && currentPage < totalPages) {
-        console.log("you're on a middle page! need a next and a last page button")
         createPreviousButton("Previous Page", "previous-page", currentPage)
         createNextButton("Next Page", "next-page", currentPage)
     }
     else if (currentPage === 1 && totalPages > 1) {
-        console.log("you're on page 1! Only need Next Page button")
-        // createPageNavButtons("Next Page", "next-page", currentPage);
         createNextButton("Next Page", "next-page", currentPage)
     }
     else if (currentPage === totalPages) {
-        console.log("you're on the last page! Only need last Page button")
-        // createPageNavButtons("Previous Page", "previous-page", currentPage);
         createPreviousButton("Previous Page", "previous-page", currentPage)
-    }
-    else {
-        console.log("you're on the one and only page -- no buttons needed!")
     }
 }
 
 
 //I JUST ADDED SO CURRENT PAGE IS SENT HERE. HOW CAN I USE THAT SO THAT THE NEXT/PREVIOUS BUTTONS HAVE ACCESS TO A PAGE NUMBER SO THEY KNOW WHAT PAGE TO SEND WHEN CALLING THE NEW PAGE FUNCTION?
 const createPageNavButtons = (buttonText, newClass, currentPage) => {
-    // console.log(newClass)
     let newPageNav =
         `<li class="page-item"><a class="page-link ${newClass}" href="#">${buttonText}</a></li>`;
 
@@ -277,7 +241,6 @@ const createPageNavButtons = (buttonText, newClass, currentPage) => {
 }
 
 const createNextButton = (buttonText, newClass, currentPage) => {
-    console.log(newClass)
     let newPageNav =
         `<li class="page-item"><a class="page-link ${newClass}" href="#">${buttonText}</a></li>`;
 
@@ -285,19 +248,16 @@ const createNextButton = (buttonText, newClass, currentPage) => {
 }
 
 const createPreviousButton = (buttonText, newClass, currentPage) => {
-    console.log(newClass)
     let newPageNav =
         `<li class="page-item"><a class="page-link ${newClass}" href="#">${buttonText}</a></li>`;
 
     $('.pagination').prepend(newPageNav);
 }
 
-//make carousel text smaller
 
 //if screen width 480px or higher, add .fixed-top to nav, and remove .fixed-bottom
 let nav = $('.navbar');
 const moveNav = () => {
-    // console.log($(window).width());
     if ($(window).width() > 479) {
         nav.addClass('fixed-top').removeClass('fixed-bottom');
     }
@@ -319,14 +279,12 @@ $(window).resize(() => {
 
 let favoriteJobs = { results: [] };
 
-const menuFunctions = () => {
+// const menuFunctions = () => {
 
-}
+// }
 
 
 const addToFavorites = (jobID) => {
-    console.log('add to favorites');
-    // console.log($('.toast-container').html());
     $('#toast-position').append(`
             <div id="addliveToast${jobID}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-body">
@@ -337,28 +295,20 @@ const addToFavorites = (jobID) => {
 
 
     let toastLiveExample = $(`#addliveToast${jobID}`);
-    // $('#toast-text').html(`Added to Favorites!`)
 
     let toast = new bootstrap.Toast(toastLiveExample);
 
     toast.show();
 
     for (let i = 0; i < visibleJobs.length; i++) {
-        // console.log(visibleJobs[i].id)
         if (visibleJobs[i].id == jobID) {
             favoriteJobs.results.push(visibleJobs[i]);
         }
     }
 
-    console.log('favoriteJobs is')
-    console.log(favoriteJobs);
 }
 
 const removeFromFavorites = (jobID) => {
-    console.log('remove from favorites');
-    console.log(jobID)
-
-    console.log(visibleJobs);
 
     $('#toast-position').append(`
             <div id="removeliveToast${jobID}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -370,7 +320,6 @@ const removeFromFavorites = (jobID) => {
 
 
     let toastLiveExample = $(`#removeliveToast${jobID}`);
-    // $('#toast-text').html(`Added to Favorites!`)
 
     let toast = new bootstrap.Toast(toastLiveExample);
 
@@ -378,17 +327,8 @@ const removeFromFavorites = (jobID) => {
 
     for (let i = 0; i < visibleJobs.length; i++) {
         if (visibleJobs[i].id == jobID) {
-            console.log('here we go');
-            console.log(favoriteJobs);
-            console.log(i);
-            favoriteJobs.results.splice(i, 1);
-            console.log('favoriteJobs is')
-            console.log(favoriteJobs);
-
-
             //remove element from DOM
             $(`#job-card-${jobID}`).fadeOut();
-            // $(`#job-card-${jobID}`).remove();
             return;
         }
     }
@@ -396,36 +336,22 @@ const removeFromFavorites = (jobID) => {
 }
 
 const showFavorites = () => {
-    console.log('show favorites');
-    console.log(favoriteJobs)
-
-    // lastPage = visibleJobs;
-    console.log('lastPage:');
-    console.log(lastPage);
+    $('#searchForm').css('display', 'none');
 
     //add new menu button for return to results
     //will also need to get rid of the button when the return button is clicked
 
     $('#return-button').removeClass('hidden');
 
-
-    //     $('.navbar').prepend(`<div id="return-button" class="nav-button container-fluid" href="#">
-    // <img id="nav-return-img" class="nav-icon" src="Images/Job Board Icons (1) copy 6.svg" width=40px>
-    // <a id="nav-return-link" class="nav-link container-fluid white-text no-underline">Back to Results</a>
-    // </div>`);
-
     createJobCards(favoriteJobs);
 }
 
 const returnToSearch = (data) => {
-    console.log('return to search');
-    console.log(lastPage)
     changePage(lastPage);
     $('#return-button').addClass('hidden');
 }
 
 const openSearchForm = () => {
-    console.log('open search form');
     $('#searchForm').css('display', 'block')
     $('#jobs').html("")
     $('#return-button').addClass('hidden');
@@ -435,47 +361,38 @@ const openSearchForm = () => {
 
 $(document).on('click', (event) => {
     if ($(event.target).hasClass("empty-heart")) {
-        console.log("YAY HOORAY!");
         $(event.target).attr('src', 'Images/Job Board Icons (1) copy.svg').addClass('filled-heart').removeClass('empty-heart');
-        // console.log(heart.indexOf(event.target));
 
         let jobID = $(event.target).attr('id');
         addToFavorites(jobID);
     }
     else if ($(event.target).hasClass("filled-heart")) {
-        console.log("WOAH!");
         $(event.target).attr('src', 'Images/Job Board Icons (1) copy 4.svg').addClass('empty-heart').removeClass('filled-heart');
 
         let jobID = $(event.target).attr('id');
         removeFromFavorites(jobID);
     }
     else if ($(event.target).hasClass('next-page')) {
-        console.log('next page, please!')
         changePage(livePage + 1);
     }
     else if ($(event.target).hasClass('previous-page')) {
-        console.log('previous page, please!')
         changePage(livePage - 1);
     }
-    else if ($(event.target) == $('#nav-menu-img')) {
-        console.log('nav-menu-img')
-        console.log("IT WORKED!")
-    }
-    else if ($(event.target).attr('id') === 'nav-menu-img' || $(event.target).attr('id') === 'nav-menu-link') {
-        console.log("MENU LINK")
-    }
+    // else if ($(event.target) == $('#nav-menu-img')) {
+    //     console.log('nav-menu-img')
+    //     console.log("IT WORKED!")
+    // }
+    // else if ($(event.target).attr('id') === 'nav-menu-img' || $(event.target).attr('id') === 'nav-menu-link') {
+    //     console.log("MENU LINK")
+    // }
     else if ($(event.target).attr('id') === 'nav-favorites-img' || $(event.target).attr('id') === 'nav-favorites-link') {
-        console.log("FAVORITES LINK")
         showFavorites();
     }
     else if ($(event.target).attr('id') === 'nav-search-img' || $(event.target).attr('id') === 'nav-search-link') {
-        console.log("SEARCH LINK")
         openSearchForm();
     }
     else if ($(event.target).attr('id') === 'nav-return-img' || $(event.target).attr('id') === 'nav-return-link') {
-        console.log("RETURN LINK");
         returnToSearch(lastPage);
-        // openSearchForm();
     }
 })
 
@@ -508,30 +425,3 @@ $(document).on('mouseout', (event) => {
         $('#nav-return-link').css('color', 'white')
     }
 })
-
-        //use this to change color of text when hovering over the img or the link
-        // $('.#nav-menu-link').css('color', 'var(--yellow-200)')
-
-
-
-// const hideTarget = (heart) => {
-//     console.log('remove hidden!');
-//     // console.log(heart);
-//     // $(heart).css({ 'display': 'none', 'width': '40px' })
-//     $(heart).animate({ width: '40px' }, 50)
-//     $(heart).animate({ width: '30px', 'opacity': '0', 'width': '0px' }, 50)
-// }
-
-// const showSibling = (heart) => {
-//     console.log('show hidden!');
-//     $(heart).animate({ width: '40px' }, 50)
-//     $(heart).animate({ width: '30px', 'opacity': '100', 'width': '30px' }, 50)
-//     // console.log(heart);
-//     // $(heart).css({ 'display': 'block', 'width': '40px' })
-//     // $(heart).delay(1000).css({ 'width': '30px' })
-// }
-//animate nav buttons
-// when search button is clicked, scroll to top of page
-// when hovering over .nav-button
-// change a.white-text color to "var(--yellow-200)" (which is #ffe69b)
-// change mouse cursor

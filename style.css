@@ -15,10 +15,18 @@
 body {
     margin-bottom: 80px;
     margin-top: 0px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
 }
 
+h1, h5 {
+    font-family: 'Secular One', sans-serif;
+}
+
+h6 {
+    font-weight: bold;
+}
 .navbar {
-    /* justify-content: space-around; */
     width: auto;
 }
 .nav-button {
@@ -31,8 +39,11 @@ body {
 }
 
 a.white-text:hover {
-    /* color: var(--yellow-200); */
     cursor: pointer;
+}
+
+a {
+    color: var(--purple-600);
 }
 
 .carousel {
@@ -52,8 +63,6 @@ form {
 
 .card {
     max-width: 800px;
-    /* margin-right: auto;
-    margin-left: auto; */
     margin: 10px auto 10px auto;
 }
 
@@ -85,19 +94,6 @@ form {
     align-items: center;
 }
 
-.empty-heart, .filled-heart {
-    /* transition-duration: .1s; */
-    /* position: absolute; */
-}
-
-.empty-heart {
-
-}
-
-.filled-heart {
-
-}
-
 .heart:hover {
     cursor: pointer;
 }
@@ -111,24 +107,13 @@ form {
 }
 
 .btn {
-    border: 2px solid var(--purple-500);
+    border: 1px solid var(--purple-500);
 }
 
 .card-link {
     padding: 5px 10px;
     text-decoration: none;
-    border: 2px solid var(--purple-500);
-    /* border: var(--purple-500); */
 }
-
-.collapse {
-    /* background-color: var(--purple-100); */
-
-}
-
-/* .toast {
-    margin: 20px;
-} */
 
 .toast-body {
     display: flex;
@@ -139,16 +124,20 @@ form {
     margin: 0 0 0 8px;
 }
 .card-link:hover, .btn:hover {
-    border: 2px solid var(--purple-600);
+    border: 1px solid var(--purple-600);
 }
 
 .white-btn {
     color: var(--purple-500);
     background-color: white;
+    border: 1px solid #dee2e6;
+
 }
 
 .white-btn:hover {
     color: var(--purple-600);
+    border: 1px solid #dee2e6;
+    background-color: #dee2e6;
 }
 
 .purple-btn {
@@ -168,8 +157,6 @@ h1 {
 
 #searchForm {
     max-width: 600px;
-    /* margin-right: auto;
-    margin-left: auto; */
     margin: 50px auto 50px auto;
 }
 
@@ -178,42 +165,13 @@ h1 {
 }
 
 .job-category-selection, .experience-levels {
-    /* height: 150px;
-    overflow-y: scroll; */
     text-align: center;
-    /* border: 1px solid var(--yellow-300);
-    ; */
     padding: 8px;
     margin: 8px 0 8px 0;
 }
-/* ***************************
-Tablet Media Query
-*************************** */
-
-/* textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {   
-  border-color: var(--yellow-300);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--yellow-300);
-  outline: 0 none;
-} */
 
 .form-control:focus {
     border-color: var(--yellow-300);
-
 }
 
 button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:focus {   
@@ -226,7 +184,6 @@ button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:f
     background-color: var(--yellow-200);   
     padding: 8px;
     float: none !important;
-    /* margin-left: 0px !important;  */
     margin: 2px !important;
     border-radius: 100px;
 }
@@ -273,10 +230,6 @@ button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:f
         font-size: 3.25rem;
     }
 }
-
-/* ***************************
-Desktop Media Query
-*************************** */
 
 @media screen and (min-width: 769px) {
     h1 {

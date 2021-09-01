@@ -5,7 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Board</title>
+
+    <link rel="icon" href="Images/R J B.png">
+    <title>Remote Job Board</title>
+
+    <!--FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,900;1,100;1,300;1,700;1,900&family=Secular+One&display=swap"
+        rel="stylesheet">
 
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -24,7 +33,6 @@
 <body class="container">
     <h1>Remote Job Board</h1>
     <!--Carousel-->
-    <!--NOTE: IDS WILL NEED TO BE ADJUSTED-->
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -67,27 +75,11 @@
 
     <nav id="page-nav" aria-label="Page navigation example">
         <p id="page-display"></p>
-        <ul class="pagination justify-content-center">
-            <!-- <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">1</a>
-            </li> -->
-            <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item"><a class="page-link" href="#">...</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">8</a>
-            </li> -->
-        </ul>
+        <ul class="pagination justify-content-center"></ul>
     </nav>
 
 
     <nav class="navbar fixed-bottom navbar-dark bg-dark">
-        <!-- <div class="nav-button container-fluid" href="#">
-            <img id="nav-menu-img" class="nav-icon" src="Images/Job Board Icons (1).svg" width=40px>
-            <a id="nav-menu-link" class="nav-link container-fluid white-text no-underline">Menu</a>
-        </div> -->
         <div id="return-button" class="nav-button hidden container-fluid" href="#">
             <img id="nav-return-img" class="nav-icon" src="Images/Job Board Icons (1) copy 6.svg" width=40px>
             <a id="nav-return-link" class="nav-link container-fluid white-text no-underline">Back to Results</a>
@@ -103,24 +95,10 @@
             <a href="#form" id="nav-search-link" class="nav-link container-fluid white-text no-underline">New Search</a>
         </div>
     </nav>
-    <!-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button> -->
-
-
 
     <div class="toast-container">
         <div id="toast-position" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11"></div>
-        <!-- <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-body">
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    <p id="toast-text"></p>
-                </div>
-            </div>
-        </div> -->
     </div>
-
-
-
 </body>
 
 </html>
