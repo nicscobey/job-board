@@ -1,7 +1,7 @@
 //LOAD DATA TO PAGE
 let jobCategoriesObject = {
     "Accounting": "Accounting",
-    "Account Management & Customer Success": "Account%20Management%2FCustomer%20Success",
+    "Account Management": "Account%20Management%2FCustomer%20Success",
     "Corporate": "Corporate",
     "Customer Service": "Customer%20Service%20Career",
     "Data Science": "Data%20Science",
@@ -45,7 +45,7 @@ let visibleJobs = [];
 
 let livePage;
 
-let lastPage = 1;
+let lastPage = 0;
 
 const appendJobCategories = () => {
     $(jobCategories).each((job) => {
@@ -84,6 +84,7 @@ appendExperienceLevels();
 
 const loadJobs = (page) => {
     linkAdd = `&page=${page}`;
+    // linkAdd = `&page=0`;
     for (let i = 0; i < jobCategories.length; i++) {
         //appends job categories to API URL
         if ($('.job-category')[i].checked == true) {
@@ -107,10 +108,8 @@ const pullData = (url) => {
         url: `${url}`
     }).then(
         function (data) {
-            // console.log(data);
             createJobCards(data);
             checkCurrentPage(data.page, data.page_count)
-            // lastPage = data;
         },
         function (error) {
             console.log('bad request', error);
@@ -121,8 +120,7 @@ const pullData = (url) => {
 
 $('form').on('submit', (event) => {
     event.preventDefault();
-    //add a note about search results about total search results found. add note to nav about what page we're on of total pages
-    changePage(1)
+    changePage(0)
 })
 
 //do the following once a page # button is clicked
@@ -199,12 +197,6 @@ const createJobCards = (data) => {
     })
 }
 
-
-//SET PAGINATION
-//NEW PAGINATION ATTEMPT (USING JUST NEXT AND LAST PAGE BUTTONS)
-
-
-
 //TO DO //////////
 
 //  CREATE README
@@ -213,17 +205,22 @@ const createJobCards = (data) => {
 
 
 const checkCurrentPage = (currentPage, totalPages) => {
+    //account for starting page being 0;
+    currentPage++;
+
     $('#page-display').html(`Page ${currentPage} of ${totalPages}`);
+
+
 
     if (totalPages === 0) {
         $('#page-display').remove();
         $('#jobs').html("Sorry - No jobs found! Try another search.")
     }
-    if (currentPage > 1 && currentPage < totalPages) {
+    if (currentPage > 0 && currentPage < totalPages) {
         createPreviousButton("Previous Page", "previous-page", currentPage)
         createNextButton("Next Page", "next-page", currentPage)
     }
-    else if (currentPage === 1 && totalPages > 1) {
+    else if (currentPage === 0 && totalPages > 1) {
         createNextButton("Next Page", "next-page", currentPage)
     }
     else if (currentPage === totalPages) {
