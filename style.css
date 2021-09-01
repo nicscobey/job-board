@@ -103,7 +103,7 @@ form {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .card-links {
@@ -124,6 +124,19 @@ form {
 .collapse {
     /* background-color: var(--purple-100); */
 
+}
+
+/* .toast {
+    margin: 20px;
+} */
+
+.toast-body {
+    display: flex;
+    align-items: center;
+}
+
+#toast-text {
+    margin: 0 0 0 8px;
 }
 .card-link:hover, .btn:hover {
     border: 2px solid var(--purple-600);

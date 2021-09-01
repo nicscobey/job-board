@@ -235,13 +235,17 @@ const createJobCards = (data) => {
 //  CREATE README
 //  CONSIDER OAUTH
 //  STORE FAVORITES LOCALLY
-//  ADD MESSAGE IF NO RESULTS FOUND
+//  NOTIFICATION (TOAST WHEN ADDED TO FAVORITE)
 
 
 const checkCurrentPage = (currentPage, totalPages) => {
 
     $('#page-display').html(`Page ${currentPage} of ${totalPages}`);
 
+    if (totalPages === 0) {
+        $('#page-display').remove();
+        $('#jobs').html("Sorry - No jobs found! Try another search.")
+    }
     if (currentPage > 1 && currentPage < totalPages) {
         console.log("you're on a middle page! need a next and a last page button")
         createPreviousButton("Previous Page", "previous-page", currentPage)
@@ -322,6 +326,22 @@ const menuFunctions = () => {
 
 const addToFavorites = (jobID) => {
     console.log('add to favorites');
+    // console.log($('.toast-container').html());
+    $('#toast-position').append(`
+            <div id="addliveToast${jobID}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                <p id="toast-text">Added to Favorites!</p>
+            </div>
+        </div>`);
+
+
+    let toastLiveExample = $(`#addliveToast${jobID}`);
+    // $('#toast-text').html(`Added to Favorites!`)
+
+    let toast = new bootstrap.Toast(toastLiveExample);
+
+    toast.show();
 
     for (let i = 0; i < visibleJobs.length; i++) {
         // console.log(visibleJobs[i].id)
@@ -340,6 +360,22 @@ const removeFromFavorites = (jobID) => {
 
     console.log(visibleJobs);
 
+    $('#toast-position').append(`
+            <div id="removeliveToast${jobID}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                <p id="toast-text">Removed from Favorites!</p>
+            </div>
+        </div>`);
+
+
+    let toastLiveExample = $(`#removeliveToast${jobID}`);
+    // $('#toast-text').html(`Added to Favorites!`)
+
+    let toast = new bootstrap.Toast(toastLiveExample);
+
+    toast.show();
+
     for (let i = 0; i < visibleJobs.length; i++) {
         if (visibleJobs[i].id == jobID) {
             console.log('here we go');
@@ -351,7 +387,8 @@ const removeFromFavorites = (jobID) => {
 
 
             //remove element from DOM
-            $(`#job-card-${jobID}`).remove();
+            $(`#job-card-${jobID}`).fadeOut();
+            // $(`#job-card-${jobID}`).remove();
             return;
         }
     }
@@ -369,10 +406,13 @@ const showFavorites = () => {
     //add new menu button for return to results
     //will also need to get rid of the button when the return button is clicked
 
-    $('.navbar').prepend(`<div id="return-button" class="nav-button container-fluid" href="#">
-<img id="nav-return-img" class="nav-icon" src="Images/Job Board Icons (1) copy 6.svg" width=40px>
-<a id="nav-return-link" class="nav-link container-fluid white-text no-underline">Back to Results</a>
-</div>`);
+    $('#return-button').removeClass('hidden');
+
+
+    //     $('.navbar').prepend(`<div id="return-button" class="nav-button container-fluid" href="#">
+    // <img id="nav-return-img" class="nav-icon" src="Images/Job Board Icons (1) copy 6.svg" width=40px>
+    // <a id="nav-return-link" class="nav-link container-fluid white-text no-underline">Back to Results</a>
+    // </div>`);
 
     createJobCards(favoriteJobs);
 }
@@ -381,13 +421,16 @@ const returnToSearch = (data) => {
     console.log('return to search');
     console.log(lastPage)
     changePage(lastPage);
-    $('#return-button').remove();
+    $('#return-button').addClass('hidden');
 }
 
 const openSearchForm = () => {
     console.log('open search form');
     $('#searchForm').css('display', 'block')
     $('#jobs').html("")
+    $('#return-button').addClass('hidden');
+    $('.pagination').html("");
+    $('#page-display').html("");
 }
 
 $(document).on('click', (event) => {
