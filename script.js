@@ -211,19 +211,29 @@ const checkCurrentPage = (currentPage, totalPages) => {
     $('#page-display').html(`Page ${currentPage} of ${totalPages}`);
 
 
+    console.log('current page', currentPage);
+    console.log('total pages', totalPages)
+
 
     if (totalPages === 0) {
+        console.log('A');
         $('#page-display').remove();
         $('#jobs').html("Sorry - No jobs found! Try another search.")
     }
-    if (currentPage > 0 && currentPage < totalPages) {
+    if (currentPage > 1 && currentPage < totalPages) {
+        console.log('B');
+
         createPreviousButton("Previous Page", "previous-page", currentPage)
         createNextButton("Next Page", "next-page", currentPage)
     }
-    else if (currentPage === 0 && totalPages > 1) {
+    else if (currentPage === 1 && totalPages > 1) {
+        console.log('C');
+
         createNextButton("Next Page", "next-page", currentPage)
     }
-    else if (currentPage === totalPages) {
+    else if (currentPage === totalPages && totalPages > 1) {
+        console.log('D');
+
         createPreviousButton("Previous Page", "previous-page", currentPage)
     }
 }
