@@ -47,8 +47,6 @@ let livePage;
 
 let lastPage = 0;
 
-let showingFavorites = false;
-
 const appendJobCategories = () => {
     $(jobCategories).each((job) => {
         $('.job-category-selection').append(`
@@ -334,23 +332,14 @@ const removeFromFavorites = (jobID) => {
 
     toast.show();
 
-    for (let i = 0; i < favoriteJobs.results.length; i++) {
-        if (favoriteJobs.results[i].id == jobID) {
-            //remove element from favorites array
-            favoriteJobs.results.splice(i, 1);
-            i--;
+    for (let i = 0; i < visibleJobs.length; i++) {
+        if (visibleJobs[i].id == jobID) {
+            //remove element from DOM
+            $(`#job-card-${jobID}`).fadeOut();
+            return;
         }
     }
 
-    if (showingFavorites) {
-        for (let i = 0; i < visibleJobs.length; i++) {
-            if (visibleJobs[i].id == jobID) {
-                //remove element from DOM
-                $(`#job-card-${jobID}`).fadeOut();
-                return;
-            }
-        }
-    }
 }
 
 const showFavorites = () => {
@@ -358,13 +347,13 @@ const showFavorites = () => {
 
     //add new menu button for return to results
     //will also need to get rid of the button when the return button is clicked
+
     $('#return-button').removeClass('hidden');
 
     createJobCards(favoriteJobs);
 }
 
 const returnToSearch = (data) => {
-    showingFavorites = false;
     changePage(lastPage);
     $('#return-button').addClass('hidden');
 }
@@ -404,15 +393,12 @@ $(document).on('click', (event) => {
     //     console.log("MENU LINK")
     // }
     else if ($(event.target).attr('id') === 'nav-favorites-img' || $(event.target).attr('id') === 'nav-favorites-link') {
-        showingFavorites = true;
         showFavorites();
     }
     else if ($(event.target).attr('id') === 'nav-search-img' || $(event.target).attr('id') === 'nav-search-link') {
-        showingFavorites = false;
         openSearchForm();
     }
     else if ($(event.target).attr('id') === 'nav-return-img' || $(event.target).attr('id') === 'nav-return-link') {
-        showingFavorites = false;
         returnToSearch(lastPage);
     }
 })
