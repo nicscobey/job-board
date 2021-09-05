@@ -420,6 +420,9 @@ $(document).on('mouseover', (event) => {
         $('#nav-return-link').css('color', '#64cbce');
         $('#nav-return-img').attr('src', 'Images/BlueReturnToSearch.svg')
     }
+    else if ($(event.target).hasClass('heart')) {
+        $(event.target).attr('width', '35px');
+    }
 })
 
 $(document).on('mouseout', (event) => {
@@ -437,5 +440,8 @@ $(document).on('mouseout', (event) => {
     else if ($(event.target).attr('id') === 'nav-return-img' || $(event.target).attr('id') === 'nav-return-link') {
         $('#nav-return-link').css('color', 'white');
         $('#nav-return-img').attr('src', 'Images/WhiteReturnArrow.svg')
+    }
+    else if ($(event.target).hasClass('heart')) {
+        $(event.target).attr('width', '30px');
     }
 })

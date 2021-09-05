@@ -1,5 +1,4 @@
 # Remote Job Board
-
 This application is a search tool built with Bootstrap. Calling a job search API from The Muse, the application features the following:
 * mobile-first design
 * an informational carousel,
@@ -11,7 +10,6 @@ This application is a search tool built with Bootstrap. Calling a job search API
 Throughout the development and design, close attention was paid to the user experience, as seen through the visual design and UI, balance of text with visuals and icons, accessibility, hover states, alerts, and subtle animations. 
 
 ## Technologies Used
-***
 * HTML
 * CSS
 * JavaScript
@@ -21,11 +19,9 @@ Throughout the development and design, close attention was paid to the user expe
 * API from [The Muse](https://www.themuse.com/developers/api/v2)
 
 ## Getting Started
-***
 [Click here](https://nicscobey.github.io/job-board/) to use the app. For full functionality, explore using multiple filters and select add/remove some jobs to/from the Favorites list. 
 
 ## Challenges & Future Work
-***
 Challenges that had to be addressed fell under two major categories:
 1. Front-end-centric development: My initial attention to this project is strictly focused on the front end of the program, which limited the ability to create user accounts, allow personal settings to be modified, and had a strong influence on the way favorites had to be stored within JavaScript
 1. API Limitations: 

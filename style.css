@@ -231,6 +231,10 @@ button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:f
     border-color: var(--purple-600);
 }
 
+.heart {
+    transition-duration: .25s;
+}
+
 .form-check {
     /* background-color: var(--yellow-200);    */
     background: linear-gradient(180deg, #4EA8DE 0%, #48BFE3 100%);
