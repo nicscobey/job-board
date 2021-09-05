@@ -156,12 +156,12 @@ const createJobCards = (data) => {
 
 
         let heartClass = "empty-heart";
-        let heartImgRef = "Images/Job Board Icons (1) copy 4.svg";
+        let heartImgRef = "Images/DarkBlueTransparentHeart.svg";
 
         for (let i = 0; i < favoriteJobs.results.length; i++) {
             if (favoriteJobs.results[i].id == job.id) {
                 heartClass = "filled-heart";
-                heartImgRef = "Images/Job Board Icons (1) copy.svg";
+                heartImgRef = "Images/DarkBlueHeartFilled.svg";
             }
         }
 
@@ -173,8 +173,8 @@ const createJobCards = (data) => {
                     <div class="header-top-row header-row">
                         <div class="header title-employer-names">
                             <h5 class="job-title">${job.name}</h5>
-                            <h6 class="employer-location card-subtitle mb-2 text-muted">${job.company.name}</h6>
-                            <h7 class="date-posted card-subtitle mb-2 text-muted italics">Posted ${modifiedDateFormat}</h7>
+                            <h6 class="employer-location card-subtitle mb-2">${job.company.name}</h6>
+                            <h7 class="date-posted card-subtitle mb-2 italics">Posted ${modifiedDateFormat}</h7>
                         </div>
                         <img id="${job.id}" class="nav-icon heart ${heartClass}" src="${heartImgRef}" width=30px>
                     </div>
@@ -379,13 +379,13 @@ const openSearchForm = () => {
 
 $(document).on('click', (event) => {
     if ($(event.target).hasClass("empty-heart")) {
-        $(event.target).attr('src', 'Images/Job Board Icons (1) copy.svg').addClass('filled-heart').removeClass('empty-heart');
+        $(event.target).attr('src', 'Images/DarkBlueHeartFilled.svg').addClass('filled-heart').removeClass('empty-heart');
 
         let jobID = $(event.target).attr('id');
         addToFavorites(jobID);
     }
     else if ($(event.target).hasClass("filled-heart")) {
-        $(event.target).attr('src', 'Images/Job Board Icons (1) copy 4.svg').addClass('empty-heart').removeClass('filled-heart');
+        $(event.target).attr('src', 'Images/DarkBlueTransparentHeart.svg').addClass('empty-heart').removeClass('filled-heart');
 
         let jobID = $(event.target).attr('id');
         removeFromFavorites(jobID);

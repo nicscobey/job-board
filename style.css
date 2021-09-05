@@ -1,5 +1,5 @@
 :root {
-    --purple-100: #e2d9f3;
+    /* --purple-100: #e2d9f3;
     --purple-200: #c5b4e5;
     --purple-300: #a98eda;
     --purple-500: #7042c1;
@@ -7,6 +7,20 @@
     --purple-700: #432874;
     --yellow-100: #fdf3cd;
     --yellow-200: #ffe69b;
+    --yellow-300: #ffd969;
+    --yellow-400: #ffcd38;
+    --yellow-500: #ffc007; */
+
+    --purple-100: #e2d9f3;
+    --purple-200: #c5b4e5;
+    --purple-300: #a98eda;
+    --purple-500: #1A759F
+    ;
+    --purple-600: #1E6091;
+    --purple-700: #432874;
+    /* --yellow-100: linear-gradient(to bottom right, #80FFB8, #72EFDD, #); */
+    --yellow-200: #CAECAC
+    ;
     --yellow-300: #ffd969;
     --yellow-400: #ffcd38;
     --yellow-500: #ffc007;
@@ -17,19 +31,35 @@ body {
     margin-top: 0px;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
+    /* background: linear-gradient(to bottom, black, white); */
+    background-attachment: fixed;
 }
 
 h1, h5 {
     font-family: 'Secular One', sans-serif;
 }
 
+h1 {
+    color: #4ea8de;
+    text-shadow: .5px .5px #000000;
+}
+
 h6 {
     font-weight: bold;
+}
+
+.bg-dark {
+    /* background-color: #292929; */
+    /* background: linear-gradient(180deg, #7400B8 0%, #6930C3 48.96%, #5E60CE 100%); */
+    /* background-color: #5E60CE !important; */
+    background: linear-gradient(180deg,  #52249b 0%, #494aa1 100%);
+
 }
 .navbar {
     width: auto;
     flex-wrap: nowrap;
 }
+
 .nav-button {
     display: flex;
     flex-direction: column;
@@ -58,8 +88,10 @@ form {
 
 .form-label {
     font-weight: bold;
-    color: var(--purple-500);
+    /* color: var(--purple-500); */
+    color: #14B89F;
     display: block;
+    font-size: 1.25rem;
 }
 
 .card {
@@ -86,9 +118,14 @@ form {
 }
 
 .card-header {
-    background-color: var(--yellow-100);
-
+    /* background-color: var(--yellow-100); */
+    /* background: linear-gradient(to bottom right, #B6E2C5, #A9DBCC); */
+    background: linear-gradient(to top left, #80FFB8, #72EFDD, #64DFDF)
 }
+
+
+
+
 .header-top-row {
     display: flex;
     justify-content: space-between;
@@ -107,6 +144,9 @@ form {
     text-align: center;
 }
 
+.border-secondary {
+    border-color: #4ea8de !important;
+}
 .btn {
     border: 1px solid var(--purple-500);
 }
@@ -114,6 +154,8 @@ form {
 .card-link {
     padding: 5px 10px;
     text-decoration: none;
+    border: none;
+    /* font-weight: bold; */
 }
 
 .toast-body {
@@ -125,30 +167,35 @@ form {
     margin: 0 0 0 8px;
 }
 .card-link:hover, .btn:hover {
-    border: 1px solid var(--purple-600);
+    /* border: 1px solid var(--purple-600); */
 }
 
 .white-btn {
-    color: var(--purple-500);
+    /* color: var(--purple-500); */
+    color: #6930c3;
     background-color: white;
-    border: 1px solid #dee2e6;
+    /* border: 1px solid #a1a2a3; */
 
 }
 
 .white-btn:hover {
-    color: var(--purple-600);
-    border: 1px solid #dee2e6;
+    /* color: var(--purple-600); */
+    color: #7400b8;
+    /* border: 1px solid #dee2e6; */
     background-color: #dee2e6;
 }
 
 .purple-btn {
     color: white;
-    background-color: var(--purple-500);
+    /* background-color: var(--purple-500); */
+    /* background: linear-gradient(270deg, #4EA8DE 0%, #56CFE1 100%); */
+    background: linear-gradient(180deg,  #6930C3 0%, #5E60CE 100%);
 }
 
 .purple-btn:hover, .purple-btn:focus, .custom-control-label:before {
-    background-color: var(--purple-600);
+    /* background-color: var(--purple-600); */
     color: white;
+    background: linear-gradient(180deg,  #52249b 0%, #494aa1 100%);
 }
 
 h1 {
@@ -182,11 +229,13 @@ button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:f
 }
 
 .form-check {
-    background-color: var(--yellow-200);   
+    /* background-color: var(--yellow-200);    */
+    background: linear-gradient(180deg, #4EA8DE 0%, #48BFE3 100%);
     padding: 8px;
     float: none !important;
     margin: 2px !important;
     border-radius: 100px;
+    color: white;
 }
 
 .form-check-input {
@@ -197,12 +246,13 @@ button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:f
 
 .form-check-input:focus {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--purple-300);
-    border-color: var(--purple-600);
+    border-color: #80ffd8;
 }
 
 .form-check-input:checked {
-    background-color: var(--purple-500);
-    border-color: var(--purple-600);
+    /* background-color: var(--purple-500); */
+    background-color: #14B89F;
+    border-color: #80ffd8;
 
 }
 
@@ -215,11 +265,14 @@ button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:f
 }
 
 .page-link {
-    color: var(--purple-500);
+    /* color: var(--purple-500); */
+    color: #6930c3;
 }
 
 .page-link:hover {
-    color: var(--purple-600);
+    /* color: var(--purple-600); */
+    color: #7400b8;
+
 }
 
 @media screen and (min-width: 480px) {
