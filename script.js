@@ -156,12 +156,12 @@ const createJobCards = (data) => {
 
 
         let heartClass = "empty-heart";
-        let heartImgRef = "Images/DarkBlueTransparentHeart.svg";
+        let heartImgRef = "Images/PurpleTransHeart.svg";
 
         for (let i = 0; i < favoriteJobs.results.length; i++) {
             if (favoriteJobs.results[i].id == job.id) {
                 heartClass = "filled-heart";
-                heartImgRef = "Images/DarkBlueHeartFilled.svg";
+                heartImgRef = "Images/PurpleFilledHeart.svg";
             }
         }
 
@@ -212,30 +212,18 @@ const checkCurrentPage = (currentPage, totalPages) => {
 
     $('#page-display').html(`Page ${currentPage} of ${totalPages}`);
 
-
-    console.log('current page', currentPage);
-    console.log('total pages', totalPages)
-
-
     if (totalPages === 0) {
-        console.log('A');
         $('#page-display').remove();
         $('#jobs').html("Sorry - No jobs found! Try another search.")
     }
     if (currentPage > 1 && currentPage < totalPages) {
-        console.log('B');
-
         createPreviousButton("Previous Page", "previous-page", currentPage)
         createNextButton("Next Page", "next-page", currentPage)
     }
     else if (currentPage === 1 && totalPages > 1) {
-        console.log('C');
-
         createNextButton("Next Page", "next-page", currentPage)
     }
     else if (currentPage === totalPages && totalPages > 1) {
-        console.log('D');
-
         createPreviousButton("Previous Page", "previous-page", currentPage)
     }
 }
@@ -379,13 +367,13 @@ const openSearchForm = () => {
 
 $(document).on('click', (event) => {
     if ($(event.target).hasClass("empty-heart")) {
-        $(event.target).attr('src', 'Images/DarkBlueHeartFilled.svg').addClass('filled-heart').removeClass('empty-heart');
+        $(event.target).attr('src', "Images/PurpleFilledHeart.svg").addClass('filled-heart').removeClass('empty-heart');
 
         let jobID = $(event.target).attr('id');
         addToFavorites(jobID);
     }
     else if ($(event.target).hasClass("filled-heart")) {
-        $(event.target).attr('src', 'Images/DarkBlueTransparentHeart.svg').addClass('empty-heart').removeClass('filled-heart');
+        $(event.target).attr('src', 'Images/PurpleTransHeart.svg').addClass('empty-heart').removeClass('filled-heart');
 
         let jobID = $(event.target).attr('id');
         removeFromFavorites(jobID);
@@ -398,7 +386,6 @@ $(document).on('click', (event) => {
     }
     // else if ($(event.target) == $('#nav-menu-img')) {
     //     console.log('nav-menu-img')
-    //     console.log("IT WORKED!")
     // }
     // else if ($(event.target).attr('id') === 'nav-menu-img' || $(event.target).attr('id') === 'nav-menu-link') {
     //     console.log("MENU LINK")
@@ -419,16 +406,19 @@ $(document).on('click', (event) => {
 
 $(document).on('mouseover', (event) => {
     if ($(event.target).attr('id') === 'nav-menu-img' || $(event.target).attr('id') === 'nav-menu-link') {
-        $('#nav-menu-link').css('color', 'var(--yellow-200)')
+        $('#nav-menu-link').css('color', '#64cbce');
     }
     else if ($(event.target).attr('id') === 'nav-favorites-img' || $(event.target).attr('id') === 'nav-favorites-link') {
-        $('#nav-favorites-link').css('color', 'var(--yellow-200)')
+        $('#nav-favorites-link').css('color', '#64cbce');
+        $('#nav-favorites-img').attr('src', 'Images/BlueHeart.svg')
     }
     else if ($(event.target).attr('id') === 'nav-search-img' || $(event.target).attr('id') === 'nav-search-link') {
-        $('#nav-search-link').css('color', 'var(--yellow-200)')
+        $('#nav-search-link').css('color', '#64cbce');
+        $('#nav-search-img').attr('src', 'Images/BlueMagGlass.svg')
     }
     else if ($(event.target).attr('id') === 'nav-return-img' || $(event.target).attr('id') === 'nav-return-link') {
-        $('#nav-return-link').css('color', 'var(--yellow-200)')
+        $('#nav-return-link').css('color', '#64cbce');
+        $('#nav-return-img').attr('src', 'Images/BlueReturnToSearch.svg')
     }
 })
 
@@ -437,12 +427,15 @@ $(document).on('mouseout', (event) => {
         $('#nav-menu-link').css('color', 'white')
     }
     else if ($(event.target).attr('id') === 'nav-favorites-img' || $(event.target).attr('id') === 'nav-favorites-link') {
-        $('#nav-favorites-link').css('color', 'white')
+        $('#nav-favorites-link').css('color', 'white');
+        $('#nav-favorites-img').attr('src', 'Images/WhiteFilledHeart.svg')
     }
     else if ($(event.target).attr('id') === 'nav-search-img' || $(event.target).attr('id') === 'nav-search-link') {
-        $('#nav-search-link').css('color', 'white')
+        $('#nav-search-link').css('color', 'white');
+        $('#nav-search-img').attr('src', 'Images/WhiteMagGlass.svg')
     }
     else if ($(event.target).attr('id') === 'nav-return-img' || $(event.target).attr('id') === 'nav-return-link') {
-        $('#nav-return-link').css('color', 'white')
+        $('#nav-return-link').css('color', 'white');
+        $('#nav-return-img').attr('src', 'Images/WhiteReturnArrow.svg')
     }
 })

@@ -89,7 +89,7 @@ form {
 .form-label {
     font-weight: bold;
     /* color: var(--purple-500); */
-    color: #14B89F;
+    color: #1D7874;
     display: block;
     font-size: 1.25rem;
 }
@@ -120,7 +120,10 @@ form {
 .card-header {
     /* background-color: var(--yellow-100); */
     /* background: linear-gradient(to bottom right, #B6E2C5, #A9DBCC); */
-    background: linear-gradient(to top left, #80FFB8, #72EFDD, #64DFDF)
+    /* background: linear-gradient(to top left, #80FFB8, #72EFDD, #64DFDF); */
+    /* background: linear-gradient(to top left, #c1fcdb, #b1eee5, #9edddd); */
+    background: linear-gradient(to top left, #bff5d7, #b1e9e0, #b1dddd);
+
 }
 
 
@@ -251,7 +254,7 @@ button:focus, .btn-primary:active, .form-control:focus, .btn:focus, .page-link:f
 
 .form-check-input:checked {
     /* background-color: var(--purple-500); */
-    background-color: #14B89F;
+    background-color: #1D7874;
     border-color: #80ffd8;
 
 }
